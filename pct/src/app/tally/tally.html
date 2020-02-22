@@ -10,7 +10,7 @@
 <!-- Tally cards load if there are any -->
 <div *ngIf="userData.length >= 1; else noCards">
     <ion-card class="ion-card-custom" *ngFor="let tal of userData; let i = index;" (tap)="increaseCount($event,i)">
-        <ion-item>
+        <ion-item [attr.data-count]="tal.count">
             <ion-icon name="pin" slot="start"></ion-icon>
             <ion-label>{{ tal.title }}</ion-label>
             <section class="tally-info-count"  [attr.data-count]="tal.count" >{{ tal.count }}</section>

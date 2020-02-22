@@ -34,15 +34,14 @@ export class Tally implements OnInit {
         const dateTime: Date = new Date();
         const created: String = `${dateTime.getUTCMonth() + 1} - ${dateTime.getDay} - ${dateTime.getUTCFullYear()}`;
         console.log(`${dateTime.getUTCMonth() + 1} - ${dateTime.getDay} - ${dateTime.getUTCFullYear()}`);
-        console.log("hello")
-
+        
         this.userData = 
         [
             {
                 id: 0,
                 title: "Title1",
                 count: 0,
-                created: created
+                created
             },
             {
                 id: 1,
@@ -55,8 +54,6 @@ export class Tally implements OnInit {
 
     increaseCount(e,index: number) {
         const specificUserData = this.userData[index];
-        console.log('specificUserData:', specificUserData);
-        console.log(e.target, e.target.count)
         specificUserData.count++;
     }
 
