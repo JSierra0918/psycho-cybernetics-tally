@@ -1,9 +1,32 @@
-<main class="tally-container ion-padding">
-    <section class="tally-info-title">
-        <h3>Title of the component -- {{ title }} </h3>
-    </section>
-    <section class="tally-info-count">{{ count }} </section>
-    <section class="tally-info-i">
-        <div class="info-button">i</div>
-    </section>
-</main>
+<!-- instantiate the template -->
+<ng-container *ngTemplateOutlet="tutorial"></ng-container>
+
+<!-- tutorial on ng-templates -->
+<ng-template #tutorial>
+    <button class="tab-button" (click)="login()">{{loginText}}</button>
+    <button class="tab-button" (click)="signUp()">{{signUpText}}</button>
+</ng-template>
+
+<!-- Tally cards load if there are any -->
+<div *ngIf="userData.length >= 1; else noCards">
+    <ion-card class="ion-card-custom" *ngFor="let tal of userData; let i = index;" (tap)="increaseCount($event,i)">
+        <ion-item>
+            <ion-icon name="pin" slot="start"></ion-icon>
+            <ion-label>{{ tal.title }}</ion-label>
+            <section class="tally-info-count"  [attr.data-count]="tal.count" >{{ tal.count }}</section>
+            <section class="tally-info-count">{{ tap }} </section>
+            <ion-button fill="outline" slot="end" class="info-button" (tap)="goToStats($event,i)"> i </ion-button>
+        </ion-item>
+        <ion-item>
+            <ion-label>{{ tal.created }} </ion-label>
+        </ion-item>
+    </ion-card>
+</div>
+
+<ng-template #noCards>
+    <ion-item>
+        <ion-label class="no-userData-title"> You do not have any tally cards </ion-label>
+        <ion-label class="no-userData-subtext"> click the + and add one! </ion-label>
+        <ion-icon name="add-circle-outline" (tap)="addTallyCard($event)" class="add-icon"></ion-icon>
+    </ion-item>
+</ng-template>
