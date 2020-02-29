@@ -1,0 +1,7 @@
+$infoBackgroundColor: rgb(40, 123, 247);
+$infoWordColor: white;
+
+.info-button {
+    background: $infoBackgroundColor;
+    color: $infoWordColor;
+}
