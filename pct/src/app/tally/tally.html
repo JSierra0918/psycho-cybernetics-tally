@@ -15,7 +15,7 @@
             <ion-label>{{ tal.title }}</ion-label>
             <section class="tally-info-count"  [attr.data-count]="tal.count" >{{ tal.count }}</section>
             <section class="tally-info-count">{{ tap }} </section>
-            <ion-button fill="outline" slot="end" class="info-button" (tap)="goToStats($event,i)"> i </ion-button>
+            <ion-button fill="outline" slot="end" class="info-button" (click)="goToStats($event,i)"> i </ion-button>
         </ion-item>
         <ion-item>
             <ion-label>{{ tal.created }} </ion-label>

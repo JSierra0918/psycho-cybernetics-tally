@@ -17,6 +17,7 @@ export class Tally implements OnInit {
     loginText = 'Login';
     signUpText = 'Sign Up';
     lessons:Array<String> = ['Lesson 1', 'Lessons 2'];
+    testCount: number = 10;
 
     login() {
         console.log('Login');
@@ -34,7 +35,7 @@ export class Tally implements OnInit {
         const dateTime: Date = new Date();
         const created: String = `${dateTime.getUTCMonth() + 1} - ${dateTime.getDay} - ${dateTime.getUTCFullYear()}`;
         console.log(`${dateTime.getUTCMonth() + 1} - ${dateTime.getDay} - ${dateTime.getUTCFullYear()}`);
-        
+
         this.userData = 
         [
             {
@@ -53,6 +54,7 @@ export class Tally implements OnInit {
     }
 
     increaseCount(e,index: number) {
+        console.log("EVENT PROP")
         const specificUserData = this.userData[index];
         specificUserData.count++;
     }
@@ -62,12 +64,14 @@ export class Tally implements OnInit {
         console.log("TAP!");
     }
 
-    goToStats(e:Event, index: number) {
+    goToStats(event:Event, index: number) {
+        console.log(event)
+        // event.preventDefault();
+        event.stopPropagation()
         const specificUserData = this.userData[index];
-        console.log(e);
         //workaround for stopPropagation not working.
+        // console.log('GoToStats:', specificUserData.title + specificUserData.count--, index, this.testCount)
         specificUserData.count--;
-        // e.stopPropagation();
         //send user to statistics page
 
     }
