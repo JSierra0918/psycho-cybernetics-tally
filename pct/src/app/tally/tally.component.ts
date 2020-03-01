@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { getLocaleDateTimeFormat } from '@angular/common';
 
+import { Users } from '../model/user';
+
 // import userDataJ from '../localStorage/userData.json';
 
 //decorator
@@ -11,12 +13,13 @@ import { getLocaleDateTimeFormat } from '@angular/common';
 })
 
 export class Tally implements OnInit {
-    userData: any[];
+    userData: Array<Users>[] = [];
+    //added static number to see if I don't need the closure function
+    static staticIdNumber: number = 0;
 
     // template Tutorial
     loginText = 'Login';
     signUpText = 'Sign Up';
-    lessons:Array<String> = ['Lesson 1', 'Lessons 2'];
     testCount: number = 10;
 
     login() {
@@ -27,6 +30,19 @@ export class Tally implements OnInit {
         console.log('Sign Up');
         console.log(`Today is ${new Intl.DateTimeFormat('en-US').format(new Date())}`);
     }
+
+    handleIDCounter() {
+        let idNumber: number = 0;
+        return function increaseID() {
+            idNumber += 1
+            return idNumber;
+        };
+    }
+
+    // This is temporary could replace ID counter function
+    handleIDCounterStatic() {
+        this.staticIdNumber++;
+    }
     //====================================================================== TEMPLATED END
 
     constructor() { }
@@ -34,26 +50,27 @@ export class Tally implements OnInit {
     ngOnInit() {
         const dateTime: Date = new Date();
         const created: String = `${dateTime.getUTCMonth() + 1} - ${dateTime.getDay} - ${dateTime.getUTCFullYear()}`;
+        const infiniteIDCounter = this.handleIDCounter();
         console.log(`${dateTime.getUTCMonth() + 1} - ${dateTime.getDay} - ${dateTime.getUTCFullYear()}`);
 
-        this.userData = 
-        [
-            {
-                id: 0,
-                title: "Title1",
-                count: 0,
-                created
-            },
-            {
-                id: 1,
-                title: "Title2",
-                count: 0,
-                created: created
-            }
-        ]
+        this.userData =
+            [
+                {
+                    id: infiniteIDCounter(),
+                    title: "Title1",
+                    count: 0,
+                    created
+                },
+                {
+                    id: infiniteIDCounter(),
+                    title: "Title2",
+                    count: 0,
+                    created: created
+                }
+            ]
     }
 
-    increaseCount(e,index: number) {
+    increaseCount(event: Event, index) {
         console.log("EVENT PROP")
         const specificUserData = this.userData[index];
         specificUserData.count++;
@@ -64,7 +81,7 @@ export class Tally implements OnInit {
         console.log("TAP!");
     }
 
-    goToStats(event:Event, index: number) {
+    goToStats(event: Event, index: number) {
         console.log(event)
         // event.preventDefault();
         event.stopPropagation()
