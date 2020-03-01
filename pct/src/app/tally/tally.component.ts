@@ -14,6 +14,7 @@ import { Users } from '../model/user';
 
 export class Tally implements OnInit {
     userData: Users[] = [];
+
     //added static number to see if I don't need the closure function
     static staticIdNumber: number = 0;
 
@@ -31,18 +32,6 @@ export class Tally implements OnInit {
         console.log(`Today is ${new Intl.DateTimeFormat('en-US').format(new Date())}`);
     }
 
-    handleIDCounter() {
-        let idNumber: number = 0;
-        return function increaseID() {
-            idNumber += 1
-            return idNumber;
-        };
-    }
-
-    // This is temporary could replace ID counter function
-    handleIDCounterStatic() {
-        this.staticIdNumber++;
-    }
     //====================================================================== TEMPLATED END
 
     constructor() { }
@@ -53,6 +42,7 @@ export class Tally implements OnInit {
         const infiniteIDCounter = this.handleIDCounter();
         console.log(`${dateTime.getUTCMonth() + 1} - ${dateTime.getDay} - ${dateTime.getUTCFullYear()}`);
 
+        // set user data for testing purposes
         this.userData =
             [
                 {
@@ -68,6 +58,7 @@ export class Tally implements OnInit {
                     created: created
                 }
             ]
+
     }
 
     increaseCount(event: Event, index) {
@@ -91,5 +82,18 @@ export class Tally implements OnInit {
         specificUserData.count--;
         //send user to statistics page
 
+    }
+
+    handleIDCounter() {
+        let idNumber: number = 0;
+        return function increaseID() {
+            idNumber += 1
+            return idNumber;
+        };
+    }
+
+    // This is temporary could replace ID counter function
+    handleIDCounterStatic() {
+        Tally.staticIdNumber++;
     }
 }
