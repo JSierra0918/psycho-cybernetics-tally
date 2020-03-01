@@ -13,7 +13,7 @@ import { Users } from '../model/user';
 })
 
 export class Tally implements OnInit {
-    userData: Array<Users>[] = [];
+    userData: Users[] = [];
     //added static number to see if I don't need the closure function
     static staticIdNumber: number = 0;
 
@@ -49,7 +49,7 @@ export class Tally implements OnInit {
 
     ngOnInit() {
         const dateTime: Date = new Date();
-        const created: String = `${dateTime.getUTCMonth() + 1} - ${dateTime.getDay} - ${dateTime.getUTCFullYear()}`;
+        const created: string = `${dateTime.getUTCMonth() + 1} - ${dateTime.getDay} - ${dateTime.getUTCFullYear()}`;
         const infiniteIDCounter = this.handleIDCounter();
         console.log(`${dateTime.getUTCMonth() + 1} - ${dateTime.getDay} - ${dateTime.getUTCFullYear()}`);
 

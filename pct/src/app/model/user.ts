@@ -1,5 +1,5 @@
 export interface Users {
-    id:(value:number)=> number;
+    id: number;
     title:string;
     count: number;
     created: string;
