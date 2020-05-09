@@ -13,46 +13,30 @@ import { Users } from '../model/user';
 })
 
 export class Tally implements OnInit {
-    userData: Users[] = [];
+    users: Users[] = [];
 
     //added static number to see if I don't need the closure function
     static staticIdNumber: number = 0;
 
-    // template Tutorial
-    loginText = 'Login';
-    signUpText = 'Sign Up';
-    testCount: number = 10;
-
-    login() {
-        console.log('Login');
-    }
-
-    signUp() {
-        console.log('Sign Up');
-        console.log(`Today is ${new Intl.DateTimeFormat('en-US').format(new Date())}`);
-    }
-
-    //====================================================================== TEMPLATED END
-
     constructor() { }
 
     ngOnInit() {
-        const dateTime: Date = new Date();
-        const created: string = `${dateTime.getUTCMonth() + 1} - ${dateTime.getDay} - ${dateTime.getUTCFullYear()}`;
-        const infiniteIDCounter = this.handleIDCounter();
-        console.log(`${dateTime.getUTCMonth() + 1} - ${dateTime.getDay} - ${dateTime.getUTCFullYear()}`);
-
+        const currentDate: Date = new Date();
+        const month = currentDate.getMonth();
+        const day = currentDate.getDay();
+        const year = currentDate.getFullYear();
+        const created: string = `${month}/${day} / ${year}`;
         // set user data for testing purposes
-        this.userData =
+        this.users =
             [
                 {
-                    id: infiniteIDCounter(),
+                    id: this.handleIDCounterStatic(),
                     title: "Title1",
                     count: 0,
                     created
                 },
                 {
-                    id: infiniteIDCounter(),
+                    id: this.handleIDCounterStatic(),
                     title: "Title2",
                     count: 0,
                     created: created
@@ -61,10 +45,18 @@ export class Tally implements OnInit {
 
     }
 
-    increaseCount(event: Event, index) {
-        console.log("EVENT PROP")
-        const specificUserData = this.userData[index];
+    increaseCount(event, index) {
+        event.stopImmediatePropagation();
+        const specificUserData = this.users[index];
         specificUserData.count++;
+    }
+
+    
+    decreaseCount(event, index) {
+        event.stopImmediatePropagation();
+
+        const specificUserData = this.users[index];
+        specificUserData.count--;
     }
 
     tapEvent(e) {
@@ -76,12 +68,8 @@ export class Tally implements OnInit {
         console.log(event)
         // event.preventDefault();
         event.stopPropagation()
-        const specificUserData = this.userData[index];
+        const specificUserData = this.users[index];
         //workaround for stopPropagation not working.
-        // console.log('GoToStats:', specificUserData.title + specificUserData.count--, index, this.testCount)
-        specificUserData.count--;
-        //send user to statistics page
-
     }
 
     handleIDCounter() {
@@ -93,7 +81,8 @@ export class Tally implements OnInit {
     }
 
     // This is temporary could replace ID counter function
-    handleIDCounterStatic() {
-        Tally.staticIdNumber++;
+    handleIDCounterStatic(): number {
+        const id = Tally.staticIdNumber++;
+        return id;
     }
 }
