@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
 import { User } from "../model/user";
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: "root",
@@ -9,14 +10,13 @@ export class StorageService {
 
   constructor(private storage: Storage) {}
   
-  async getItem(key:string): Promise<User[]> {
-    const getItems = await this.storage.get(key);
+  getItem(key:string):Observable<User[]> {
+    const getItems: Observable<User[]> = from(this.storage.get(key));
     return getItems;
   }
 
   async addItem(key:string, item: User): Promise<any> {
     const getItems = await this.storage.get(key);
-    console.log(typeof getItems);
     let newItems:User[] = [];
 
     if (getItems) {
@@ -34,7 +34,7 @@ export class StorageService {
     if (!getItems || getItems.length === 0) {
       return null;
     }
-
+    console.log(getItems);
     newItems.push(getItems);
     const findItem = newItems.filter(value => value.id === item.id);
     const newTitle = [...findItem, title];

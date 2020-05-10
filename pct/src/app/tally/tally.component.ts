@@ -16,12 +16,14 @@ import { StorageService } from '../services/storage.service';
 export class Tally implements OnInit {
     users: User[] = [];
     profileKey:string = 'profile';
+    displayProfile = false;
     //added static number to see if I don't need the closure function
+
 
     constructor(private storage: StorageService) { }
 
     ngOnInit() { 
-        this.getData();
+        this.storage.getItem(this.profileKey).subscribe( item => this.users = item);
     }
 
     increaseCount(event, index) {
@@ -39,7 +41,6 @@ export class Tally implements OnInit {
 
     goToStats(event: Event, index: number) {
         console.log(event)
-        // event.preventDefault();
         event.stopPropagation()
         const specificUserData = this.users[index];
         //workaround for stopPropagation not working.

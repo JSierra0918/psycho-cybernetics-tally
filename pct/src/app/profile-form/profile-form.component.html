@@ -1,6 +1,6 @@
   <ion-item>
     <ion-label>Title</ion-label>
-    <ion-input name="title" [(ngModel)]="profileTitle" aria-placeholder="Add Tally Title"></ion-input>
+    <ion-input name="title" [(ngModel)]="profileTitle" aria-placeholder="Add Tally Title" (onsubmit)="handleSubmit($event)"></ion-input>
   </ion-item>
 
   <ion-button expand="full" (click)="addItem()">Add Habit</ion-button>

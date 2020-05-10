@@ -1,11 +1,16 @@
+<ion-content padding>
 <ion-header>
   <ion-toolbar>
     <ion-title>
       Psychocybernetic Tally on Droid
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button id="addProileButton" onClick="toggleText()">
+        <ion-icon slot="start" name="add-outline" id="addProfileIcon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
-<ion-content padding>
   <app-tally></app-tally>
+
 </ion-content>

@@ -37,11 +37,16 @@ export class ProfileFormComponent implements OnInit {
   }
 
   getDate(): string {
-    const currentDate: Date = new Date();
-    const month = currentDate.getMonth();
-    const day = currentDate.getDay();
-    const year = currentDate.getFullYear();
+    const d: Date = new Date();
+    const month = d.getMonth();
+    const day = d.getDay();
+    const year = d.getFullYear();
     const created: string = `${month}/${day}/${year}`;
     return created
+  }
+
+  handleSubmit(e:Event) {
+    e.preventDefault();
+    this.addItem();
   }
 }
