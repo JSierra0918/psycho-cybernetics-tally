@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { Tally } from '../tally/tally.component'
+import { ProfileFormComponent } from '../profile-form/profile-form.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { Tally } from '../tally/tally.component'
       }
     ])
   ],
-  declarations: [HomePage, Tally]
+  declarations: [HomePage, Tally, ProfileFormComponent]
 })
 export class HomePageModule {}

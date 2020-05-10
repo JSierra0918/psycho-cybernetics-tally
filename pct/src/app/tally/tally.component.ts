@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { getLocaleDateTimeFormat } from '@angular/common';
 
-import { Users } from '../model/user';
+import { User } from '../model/user';
+import { StorageService } from '../services/storage.service';
 
 // import userDataJ from '../localStorage/userData.json';
 
@@ -13,36 +14,14 @@ import { Users } from '../model/user';
 })
 
 export class Tally implements OnInit {
-    users: Users[] = [];
-
+    users: User[] = [];
+    profileKey:string = 'profile';
     //added static number to see if I don't need the closure function
-    static staticIdNumber: number = 0;
 
-    constructor() { }
+    constructor(private storage: StorageService) { }
 
-    ngOnInit() {
-        const currentDate: Date = new Date();
-        const month = currentDate.getMonth();
-        const day = currentDate.getDay();
-        const year = currentDate.getFullYear();
-        const created: string = `${month}/${day} / ${year}`;
-        // set user data for testing purposes
-        this.users =
-            [
-                {
-                    id: this.handleIDCounterStatic(),
-                    title: "Title1",
-                    count: 0,
-                    created
-                },
-                {
-                    id: this.handleIDCounterStatic(),
-                    title: "Title2",
-                    count: 0,
-                    created: created
-                }
-            ]
-
+    ngOnInit() { 
+        this.getData();
     }
 
     increaseCount(event, index) {
@@ -51,17 +30,11 @@ export class Tally implements OnInit {
         specificUserData.count++;
     }
 
-    
     decreaseCount(event, index) {
         event.stopImmediatePropagation();
 
         const specificUserData = this.users[index];
         specificUserData.count--;
-    }
-
-    tapEvent(e) {
-        console.log(e);
-        console.log("TAP!");
     }
 
     goToStats(event: Event, index: number) {
@@ -80,9 +53,11 @@ export class Tally implements OnInit {
         };
     }
 
+    async getData():Promise<void> {
+        const data = await this.storage.getItem(this.profileKey);
+        this.users = data;
+      }
+
     // This is temporary could replace ID counter function
-    handleIDCounterStatic(): number {
-        const id = Tally.staticIdNumber++;
-        return id;
-    }
+  
 }

@@ -1,13 +1,9 @@
-<p>
-  profile-form works!
-</p>
-<ion-content>
   <ion-item>
     <ion-label>Title</ion-label>
     <ion-input name="title" [(ngModel)]="profileTitle" aria-placeholder="Add Tally Title"></ion-input>
   </ion-item>
 
   <ion-button expand="full" (click)="addItem()">Add Habit</ion-button>
+  <ion-button expand="full" (click)="getData()">Get Item</ion-button>
   <ion-button expand="full" (click)="updateItem()">Update Habit</ion-button>
   <ion-button expand="full" (click)="deleteItem()">Delete Habit</ion-button>
-</ion-content>
