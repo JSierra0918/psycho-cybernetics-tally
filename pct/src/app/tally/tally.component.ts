@@ -56,7 +56,6 @@ export class Tally implements OnInit {
 
     async getData():Promise<void> {
         const data = await this.storage.getItem(this.profileKey);
-        this.users = data;
       }
 
     // This is temporary could replace ID counter function
