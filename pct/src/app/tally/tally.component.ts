@@ -23,7 +23,7 @@ export class Tally implements OnInit {
     constructor(private storage: StorageService) { }
 
     ngOnInit() { 
-        this.storage.getItem(this.profileKey).subscribe( item => this.users = item);
+        this.storage.getItem(this.profileKey).subscribe(item => this.users = item);
     }
 
     increaseCount(event, index) {
