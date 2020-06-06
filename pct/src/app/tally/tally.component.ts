@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { getLocaleDateTimeFormat } from '@angular/common';
 
 import { User } from '../model/user';
@@ -16,9 +16,9 @@ import { StorageService } from '../services/storage.service';
 export class Tally implements OnInit {
     users: User[] = [];
     profileKey:string = 'profile';
-    displayProfile = false;
     //added static number to see if I don't need the closure function
-
+    
+    @Input() displayProfileForm;
 
     constructor(private storage: StorageService) { }
 
@@ -28,6 +28,7 @@ export class Tally implements OnInit {
 
     increaseCount(event, index) {
         event.stopImmediatePropagation();
+
         const specificUserData = this.users[index];
         specificUserData.count++;
     }
@@ -40,7 +41,6 @@ export class Tally implements OnInit {
     }
 
     goToStats(event: Event, index: number) {
-        console.log(event)
         event.stopPropagation()
         const specificUserData = this.users[index];
         //workaround for stopPropagation not working.

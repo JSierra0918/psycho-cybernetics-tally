@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  newProfile = false;  
   constructor() {}
 
+  addHabit(event) {
+    this.newProfile = !this.newProfile;
+  }
 }

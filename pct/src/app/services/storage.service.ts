@@ -34,7 +34,6 @@ export class StorageService {
     if (!getItems || getItems.length === 0) {
       return null;
     }
-    console.log(getItems);
     newItems.push(getItems);
     const findItem = newItems.filter(value => value.id === item.id);
     const newTitle = [...findItem, title];

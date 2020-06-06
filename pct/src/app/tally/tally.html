@@ -1,5 +1,7 @@
 <!-- Tally cards load if there are any -->
-<section *ngIf="users.length > 0; else noCards">
+<section
+  *ngIf="users.length > 0; else noCards"
+>
   <ion-card
     class="ion-card-custom"
     *ngFor="let user of users; let i = index;"
@@ -10,7 +12,7 @@
       <ion-icon name="pin" slot="start"></ion-icon>
       <ion-label>{{ user.title }}</ion-label>
       <section class="tally-info-count" [attr.data-count]="user.count">
-        {{ user.count }}
+        {{ user.count }} {{displayProfileForm}}
       </section>
       <ion-button
         fill="outline"
@@ -18,7 +20,7 @@
         class="info-button"
         (click)="goToStats($event,i)"
       >
-      <ion-icon name="information-outline"></ion-icon>
+        <ion-icon name="information-outline"></ion-icon>
       </ion-button>
     </ion-item>
     <ion-item>

@@ -5,12 +5,12 @@
       Psychocybernetic Tally on Droid
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button id="addProileButton" onClick="toggleText()">
+      <ion-button id="addProileButton" onClick="addHabit()">
         <ion-icon slot="start" name="add-outline" id="addProfileIcon"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-  <app-tally></app-tally>
+  <app-tally [displayProfileForm]="newProfile"></app-tally>
 
 </ion-content>
